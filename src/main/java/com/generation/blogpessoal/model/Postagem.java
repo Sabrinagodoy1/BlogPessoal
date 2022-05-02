@@ -4,9 +4,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import org.springframework.data.jpa.repository.Temporal;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 //transforma objetos em uma tabela no mySQL banco de dados
@@ -24,6 +30,12 @@ public class Postagem {
 	public String titulo;
 	@NotNull
 	public String texto;
+	
+	@ManyToOne
+	@JsonIgnoreProperties("postagem")
+	private Tema tema;
+	
+	
 	public Long getId() {
 		return id;
 	}
@@ -41,6 +53,14 @@ public class Postagem {
 	}
 	public void setTexto(String texto) {
 		this.texto = texto;
+		}
+	
+	public Tema getTema() {
+		return tema;
+	}
+	
+	public void setTema(Tema tema) {
+		this.tema = tema;
 	}
 	
 	
