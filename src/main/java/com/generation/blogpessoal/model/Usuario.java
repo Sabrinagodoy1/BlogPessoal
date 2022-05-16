@@ -14,6 +14,8 @@ import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 @Entity
 @Table(name="tb_usuario")
 
@@ -22,9 +24,10 @@ public class Usuario {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	
+	@NotNull
 	private String nome;
-	
+	@Schema(example = "email@email.com.br")
+	@NotNull(message = "O atributo Usuário é Obrigatório!")
 	@Email(message="o usuário deve ser um email valido ex:maria@email.com")
 	private String usuario;
 	
